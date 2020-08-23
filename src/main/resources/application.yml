@@ -1,0 +1,56 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+    mode: LEGACYHTML5
+  datasource:
+    username: root
+    password: '@Root123'
+    url: jdbc:mysql://47.112.183.82:3306/myblog?useSSL=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver # com.mysql.jdbc.Driver
+      #   使用 Druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+mybatis:
+  type-aliases-package: com.xl.xlblog.pojo
+  mapper-locations: classpath:mapper/*.xml
+  # 打印sql语句
+  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 延迟加载
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+
+
+# 日志配置
+logging:
+  level:
+    root: info
+#  file:
+#    name: blog/blogInfo.log
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql # 指定数据库类型
+  reasonable: true
+  params: count=countSql
+  support-methods-arguments: true
+
+
+comment:
+  avatar: "/images/avatar.jpg"

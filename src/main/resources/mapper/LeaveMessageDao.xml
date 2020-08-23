@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.LeaveMessageDao">
+    <resultMap id = "leaveMessageMap" type = "LeaveMessage">
+        <id property="id" column="id"/>
+        <result property="admin" column="admin"/>
+        <result property="nickName" column="nickName"/>
+        <result property="content" column="content"/>
+        <result property="email" column="email"/>
+        <result property="headImg" column="headImg"/>
+        <result property="createTime" column="createTime"/>
+        <result property="targetUser" column="targetUser"/>
+        <result property="level" column="level"/>
+        <result property="parLeaveMessageId" column="parLeaveMessageId"/>
+    </resultMap>
+
+    <select id = "selectAllParLeaveMessage" resultMap="leaveMessageMap">
+        select  * from leavemessage where  level = 1
+    </select>
+
+    <select id = "selectChildLeaveMessageByParLeaveMessage" resultMap="leaveMessageMap" parameterType="long">
+         select * from leavemessage where parLeaveMessageId = #{parLeaveMessageId}
+    </select>
+
+    <insert id = "insertLeaveMessage" parameterType="LeaveMessage">
+         insert into leavemessage(admin,nickName,content,email,headImg,targetUser,level,parLeaveMessageId)
+        values(#{admin},#{nickName},#{content},#{email},#{headImg},#{targetUser},#{level},#{parLeaveMessageId})
+    </insert>
+
+    <delete id = "delLeaveMessage" parameterType="long">
+       delete from leavemessage where id=#{id} or parLeaveMessageId = #{id}
+    </delete>
+</mapper>

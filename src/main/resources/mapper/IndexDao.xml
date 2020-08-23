@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.IndexDao">
+    <resultMap id = "blogMap" type = "blog">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="recommended" property="recommended"/>
+        <result column="content" property="content"/>
+        <result column="picture" property="firstPicture"/>
+        <result column="flag" property="flag"/>
+        <result column="views" property="views"/>
+        <result column="appreciation" property="appreciation"/>
+        <result column="shareStatement" property="shareStatement"/>
+        <result column="commentable" property="commentable"/>
+        <result column="publish" property="publish"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="commentCount" property="commentCount"/>
+        <association property = "type" column="id" javaType="com.xl.xlblog.pojo.Type"
+                     select="com.xl.xlblog.mapper.AdminTypeDao.selectTypeByBlogId" fetchType="lazy"/>
+        <association property = "user" column="id" javaType="com.xl.xlblog.pojo.User"
+                     select="com.xl.xlblog.mapper.AdminUserDao.selectUserByBlogId" fetchType="lazy"/>
+    </resultMap>
+
+    <select id = "latestRecommended" resultMap="blogMap" >
+        select id,picture,description from blog where recommended = 1 and publish = 1 order by updateTime desc LIMIT 0,4
+    </select>
+
+    <select id = "latestBlog" resultMap="blogMap">
+        select * from blog where publish = 1 order by updateTime desc
+    </select>
+
+</mapper>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XLBLOG-时间轴</title>
+    <link href="../static/images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/css/timeline.css" th:href="@{/css/timeline.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+</head>
+<body>
+
+<!--导航-->
+<nav class="gird-header" th:replace="~{common :: navigation(3)}"></nav>
+
+<!--时间轴内容-->
+<div class="doc-container m-padded-tb-massivex m-opacity" id="doc-container">
+    <th:block>
+        <section class="timeline">
+            <ul>
+                <li class="" th:each="timestamp : ${timestamp}">
+                    <div>
+                        <time th:text="${#dates.format(timestamp.updateTime,'yyyy-MM-dd')}">2020-07-31</time>
+                        <div class="scientist">
+                            <a href="/blog/53" target="_blank" th:href="@{/blog/details/{id}/(id=${timestamp.id})}">
+                                <h3 class="state" style="text-align:center;font-size: 16px;color: #000;"
+                                    th:text="${timestamp.title}">完结——十年之约</h3>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+    </th:block>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="~{common :: foot}">
+</footer>
+<script src="http://www.lmlblog.com/winter/templets/xq/js/snowy.js"></script>
+<style type="text/css">
+    .snow-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 100001;
+    }</style>
+<div class="snow-container"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="../static/lib/timeline/timeline.js" th:src="@{/lib/timeline/timeline.js}"></script>
+
+<script th:include="~{common :: run-time}">
+
+</script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+</script>
+</body>
+</html>

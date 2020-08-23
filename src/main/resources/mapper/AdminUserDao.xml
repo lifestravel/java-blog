@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.AdminUserDao">
+    <resultMap id = "userMap" type = "user">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="nickName" column="nickName"/>
+        <result property="email" column="email"/>
+        <result property="headImg" column="headImg"/>
+        <result property="type" column="type"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+    <select id="userLogin" parameterType="string" resultMap="userMap">
+        select * from user where username = #{username} and password = #{password}
+  </select>
+
+    <select id = "selectUserByBlogId" resultMap="userMap" parameterType="long">
+        select user.id id,username,nickName,email,headImg from user,userblog where userblog.userId=user.id and userblog.blogId = #{blogId}
+    </select>
+
+</mapper>

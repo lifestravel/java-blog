@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.AdminBlogDao">
+    <resultMap id = "blogMap" type = "blog">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="recommended" property="recommended"/>
+        <result column="content" property="content"/>
+        <result column="picture" property="firstPicture"/>
+        <result column="flag" property="flag"/>
+        <result column="views" property="views"/>
+        <result column="appreciation" property="appreciation"/>
+        <result column="shareStatement" property="shareStatement"/>
+        <result column="commentable" property="commentable"/>
+        <result column="publish" property="publish"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+    </resultMap>
+
+
+    <insert id = "addBlog" parameterType="com.xl.xlblog.pojo.Blog">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into blog(title,content,picture,flag,appreciation,shareStatement,commentable,publish,recommended,description)
+        values (#{title},#{content},#{firstPicture},#{flag},#{appreciation},#{shareStatement},#{commentable},#{publish},#{recommended},#{description})
+    </insert>
+
+    <insert id = "addBlog_Type" parameterType="Long">
+        insert  into blogtype(blogId,typeId) values(#{blogId},#{typeId})
+    </insert>
+
+    <resultMap id = "blogList" type = "com.xl.xlblog.pojo.BlogList">
+        <id property="id" column="bid"/>
+        <result property="title" column="title"/>
+        <result property="typeName" column="tname"/>
+        <result property="recommended" column="recommended"/>
+        <result property="publish" column="publish"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+    <select id = "pageSelectBlog" resultMap="blogList">
+        select blog.id bid,title,type.name tname,recommended,publish,updateTime from blog,type,blogtype
+        <where>
+            <if test="typeName == null">
+                and type.id = blogtype.typeId and blog.id = blogtype.blogId
+            </if>
+
+            <if test = "title != null">
+            <bind name = "ti" value = "'%'+title+'%'"/>
+                and title like #{ti}
+            </if>
+            <if test="recommended">
+                and recommended = #{recommended}
+            </if>
+            <if test="typeName != null">
+                and type.name = #{typeName} and type.id = blogtype.typeId and blog.id = blogtype.blogId
+            </if>
+        </where>
+    </select>
+
+    <delete id = "delBlog" parameterType="long" >
+        delete from blog where id = #{id}
+    </delete>
+
+    <delete id = "delBlogType" parameterType="long">
+        delete from blogtype where blogId = #{id}
+    </delete>
+
+    <select id = "selectBlogById" parameterType="long" resultMap="blogMap">
+        select * from blog where id =#{id}
+    </select>
+
+    <update id="editBlog" parameterType="blog">
+      update blog set title=#{title},content=#{content},picture=#{firstPicture},flag=#{flag},appreciation=#{appreciation},
+      shareStatement=#{shareStatement},commentable=#{commentable},publish=#{publish},description=#{description} where id=#{id}
+    </update>
+
+    <update id = "editBlog_Type" parameterType="long">
+        update blogtype set typeId = #{typeId} where blogId =#{id}
+    </update>
+
+    <insert id = "addUsr_blog" parameterType="long">
+        insert into userblog(userId,blogId) values(#{userId},#{blogId})
+    </insert>
+    <delete id = "delUser_Blog" parameterType="long">
+        delete  from userblog where blogId = #{blogId}
+    </delete>
+
+    <delete id = "delCommentByBlogId" parameterType="long">
+        delete from comment where blogId = #{blogId}
+    </delete>
+
+    <update id = "AddBlogCountByType" parameterType="long">
+        update type set blogCount = blogCount+1 where id = #{typeId}
+    </update>
+    <update id = "decBlogCountByType" parameterType="long">
+        update type set blogCount = blogCount-1 where id =(select typeId from blogtype where blogId = #{blogId})
+    </update>
+</mapper>

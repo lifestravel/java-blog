@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>友链</title>
+  <link href="../../static/images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+
+<!--导航栏-->
+<nav class="ui inverted gird-header" th:replace="/admin/common :: nav(3)">
+</nav>
+
+  <div class="m-padded-tb-hugex">
+  <div class="ui attached pointing menu">
+    <div class="ui container">
+      <div class="right menu">
+        <a href="#" class="item" th:href="@{/admin/friendLinkAddHtml}">新增</a>
+        <a href="#" class="teal active item">列表</a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!--中间内容-->
+  <div  class="m-padded-tb-big">
+    <div class="ui container">
+      <!--消息提示-->
+      <div class="ui success message" >
+        <i class="close icon"></i>
+        <div class="" >提示：恭喜，操作成功！</div>
+      </div>
+      <table class="ui compact teal table" th:fragment="friendLink-list" id="friendLink-list">
+        <thead>
+          <tr align="center">
+            <th>ID</th>
+            <th>博客名称</th>
+            <th>博客地址</th>
+            <th>图片地址</th>
+            <th>添加时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr align="center" th:each="friendLink,state : ${pageInfo.list}" >
+            <td th:text="${friendLink.id}" hidden></td>
+            <td th:text="${state.count}">1</td>
+            <td th:text="${friendLink.blogName}">ONESTAR</td>
+            <td th:text="${friendLink.blogAddress}">https://onestar.newstar.net.cn/</td>
+            <td th:text="${friendLink.pictureAddress}">https://onestar.newstar.net.cn/</td>
+            <td th:text="${#dates.format(friendLink.createTime,'yyyy-MM-dd HH:mm')}">2020-01-02 09:45</td>
+            <td>
+              <a href="#" class="ui mini teal basic button" th:href="@{/admin/editFriendLinkHtml/{id}/(id=${friendLink.id})}">编辑</a>
+              <a href="#" th:attr="data-friendlinkid=${friendLink.id}" class="ui mini red basic button" onclick="delFriendLink(this)">删除</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="6" >
+              <div class="ui inverted divided stackable grid">
+                <div class="three wide column" align="center" th:unless="${pageInfo.isFirstPage}">
+                  <a class="item ui mini teal basic button" id="prePage">上一页</a>
+                  <div id="preNum" th:text="${pageInfo.prePage}" hidden></div>
+                </div>
+
+                <div class="ten wide column" align="center">
+                  <p>第 <span th:text="${pageInfo.pageNum}">0</span> 页，共 <span th:text="${pageInfo.pages}">0</span> 页，有 <span th:text="${pageInfo.total}">0</span> 个友链</p>
+                </div>
+
+                <div class="three wide column" align="center" th:unless="${pageInfo.isLastPage}">
+                  <a class="item ui mini teal basic button" id="nextPage">下一页</a>
+                  <div id="nextNum" th:text="${pageInfo.nextPage}" hidden></div>
+                </div>
+              </div>
+
+              <div align="center">
+                <a href="#">
+                  <a  th:href="@{/admin/friendLinkAddHtml}" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>新增</a>
+                </a>
+              </div>
+              <div id="message"></div>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="~{/admin/common :: foot}">
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+  function delFriendLink(obj) {
+    var bool = confirm("确认删除吗?")
+    if (!bool){
+      return;
+    }
+    var id = $(obj).data("friendlinkid");
+    let url = "/admin/delFriendLink/"+id+"/";
+    $.post(url, null,
+            function (res) {
+              if (res.code == 1){
+                alert("删除成功!")
+               load(1,5);
+              }
+              if (res.code ==0){
+                $("#message").html(
+                        '          <div class="ui negative message">\n' +
+                        '            <i class="close icon"></i>\n' +
+                        '            <div class="header">提示:</div>\n' +
+                        '            <p >删除失败!</p>\n' +
+                        '          </div>')
+              }
+            },'json')
+  }
+
+  function load(currentPage, pageSize) {
+    let url = "/admin/pageSelectFriendLink";
+    let data = {};
+    data['currentPage'] = currentPage;
+    data['pageSize'] = pageSize;
+    $.get(url,
+            data,
+            function (res) {
+              $("#friendLink-list").html(res);
+            });
+  }
+
+  $(document).on('click','#prePage',function() {
+    let currentPage = $("#preNum").text();
+    load(currentPage, 5);
+  })
+
+  $(document).on('click','#nextPage',function() {
+    let currentPage = $("#nextNum").text();
+    load(currentPage, 5);
+  })
+</script>
+  <script>
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+      on : 'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+      .on('click', function () {
+        $(this)
+          .closest('.message')
+          .transition('fade');
+      });
+  </script>
+<script th:include="~{/admin/common :: run-time}">
+
+</script>
+</body>
+</html>

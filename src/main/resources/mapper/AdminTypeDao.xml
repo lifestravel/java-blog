@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.AdminTypeDao">
+    <resultMap id = "typeMap" type = "type">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <select id = "selectTypeByName" resultMap="typeMap" parameterType="string">
+        select * from type where name = #{name}
+    </select>
+
+    <insert id = "addType" parameterType="string">
+        insert into type(name) values(#{name})
+    </insert>
+
+    <delete id = "delType" parameterType="int">
+        delete from type where id = #{id}
+    </delete>
+
+    <delete id = "delBlogTypeByTypeId" parameterType="int">
+        delete from blogtype where typeId = #{typeId}
+    </delete>
+    <update id = "editType" parameterType="type">
+        update type set name = #{name} where id = #{id}
+    </update>
+
+    <select id = "pageSelect" resultMap="typeMap">
+        select id,name from type
+    </select>
+
+    <select id = "selectAll" resultMap="typeMap">
+        select id,name from type
+    </select>
+
+    <select id = "selectTypeByBlogId" resultMap="typeMap" parameterType="long">
+        select type.id id,name from type,blogtype where blogtype.typeId = type.id and blogtype.blogId = #{id}
+    </select>
+
+    <select id = "selBlogIdByType" resultType="Long" parameterType="int">
+        select blogId from blogtype where typeId = #{typeId}
+    </select>
+
+</mapper>

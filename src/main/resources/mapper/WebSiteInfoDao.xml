@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.WebSiteInfoDao">
+    <resultMap id = "websiteInfo" type = "WebSiteInfo">
+        <result property="articles" column="articles"/>
+        <result property="views" column="views"/>
+        <result property="commentCount" column="commentCount"/>
+    </resultMap>
+    <select id = "selectWebSiteInfo" resultMap="websiteInfo">
+        select count(id) articles,sum(views) 'views',sum(commentCount) 'commentCount' from blog
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.AdminPhotoDao">
+    <resultMap id = "photoMap" type = "Photo">
+        <id property="id" column="id"/>
+        <result property="photoName" column="photoName"/>
+        <result property="photoAddress" column="photoAddress"/>
+        <result property="description" column="description"/>
+    </resultMap>
+    <select id = "pageSelectPhoto" resultMap="photoMap">
+        select * from photo
+    </select>
+
+    <insert id = "addPhoto" parameterType="photo">
+        insert into photo(photoName,photoAddress,description) values(#{photoName},#{photoAddress},#{description})
+    </insert>
+
+    <update id = "editPhoto" parameterType="photo">
+        update photo set photoName = #{photoName},photoAddress=#{photoAddress},description = #{description} where id = #{id}
+    </update>
+
+    <delete id = "delPhotoById" parameterType="long">
+        delete from photo where id = #{id}
+    </delete>
+    <select id = "selectPhotoById" parameterType="long" resultMap="photoMap">
+        select * from photo where id =#{id}
+    </select>
+
+</mapper>

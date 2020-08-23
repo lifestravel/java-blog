@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.AdminFriendLinkDao">
+
+    <resultMap id = "friendLinkMap" type = "FriendLink">
+        <id property="id" column="id"/>
+        <result property="blogName" column="blogName"/>
+        <result property="blogAddress" column="blogAddress"/>
+        <result property="pictureAddress" column="pictureAddress"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+
+    <select id = "pageSelectFriendLink" resultMap="friendLinkMap">
+        select * from friendlink
+    </select>
+
+    <insert id = "addFriendLink" parameterType="friendLink">
+        insert into friendlink(blogName,blogAddress,pictureAddress) values(#{blogName},#{blogAddress},#{pictureAddress})
+    </insert>
+
+    <update id = "editFriendLink" parameterType="friendLink">
+        update friendlink set blogName = #{blogName},blogAddress = #{blogAddress},pictureAddress = #{pictureAddress} where id = #{id}
+    </update>
+
+    <delete id = "delFriendLinkById" parameterType="long">
+        delete from friendlink where id = #{id}
+    </delete>
+
+    <select id = "selectFriendLinkById" resultMap="friendLinkMap">
+        select * from friendlink where id = #{id}
+    </select>
+
+    <select id = "selectFriendLinkByURL" resultType="int" parameterType="String">
+        select count(id) from friendlink where blogAddress = #{url}
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.xlblog.mapper.CommentDao">
+
+    <resultMap id = "commentMap" type = "comment">
+        <id property="id" column="id"/>
+        <result property="admin" column="admin"/>
+        <result property="nickName" column="nickName"/>
+        <result property="content" column="content"/>
+        <result property="email" column="email"/>
+        <result property="headImg" column="headImg"/>
+        <result property="createTime" column="createTime"/>
+        <result property="blogId" column="blogId"/>
+        <result property="targetUser" column="targetUser"/>
+        <result property="level" column="level"/>
+        <result property="parCommentId" column="parCommentId"/>
+    </resultMap>
+
+    <select id = "selectParentCommentByBlogId" parameterType="long" resultMap="commentMap">
+            select  * from comment where blogId = #{blogId} and level = 1
+    </select>
+
+    <insert id = "insertComment" parameterType="comment">
+        insert into comment(admin,nickName,content,email,headImg,createTime,blogId,targetUser,level,parCommentId)
+        values(#{admin},#{nickName},#{content},#{email},#{headImg},#{createTime},#{blogId},#{targetUser},#{level},#{parCommentId})
+    </insert>
+
+    <select id = "selectChildCommentByBlogIdAndParCommentId" resultMap="commentMap">
+        select * from comment where blogId = #{blogId} and parCommentId = #{parCommentId}
+    </select>
+
+
+    <delete id = "deleteComment">
+        delete from comment where id=#{id} or parCommentId = #{id}
+    </delete>
+
+    <update id = "incrCommentCount" parameterType="long">
+        update blog set commentCount = commentCount+1 where id = #{blogId}
+    </update>
+
+    <update id = "decrCommentCount">
+         update blog set commentCount = commentCount- #{count} where id =#{blogId}
+    </update>
+
+    <select id = "selectChildCommentCount" parameterType="long" resultType="int">
+        select count(id) from comment where parCommentId = #{commentId}
+    </select>
+</mapper>
