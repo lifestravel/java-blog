@@ -24,7 +24,7 @@
             <ul>
                 <li class="" th:each="timestamp : ${timestamp}">
                     <div>
-                        <time th:text="${#dates.format(timestamp.updateTime,'yyyy-MM-dd')}">2020-07-31</time>
+                        <time th:text="${#dates.format(timestamp.createTime,'yyyy-MM-dd')}">2020-07-31</time>
                         <div class="scientist">
                             <a href="/blog/53" target="_blank" th:href="@{/blog/details/{id}/(id=${timestamp.id})}">
                                 <h3 class="state" style="text-align:center;font-size: 16px;color: #000;"
