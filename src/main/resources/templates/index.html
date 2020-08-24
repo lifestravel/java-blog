@@ -97,10 +97,10 @@
         </div>
     </div>
 
-    <div class="ui stackable m-container-mini m-opacity grid" align="center">
+    <div class="ui stackable m-container-mini m-opacity grid" align="center" >
         <div class="m-margin-tb-tiny four wide column" th:each="blog :${recommended}">
             <a class="class_outer" target="_blank" th:href="@{/blog/details/{id}/(id=${blog.id})}">
-                <img src="../static/images/newbg.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">
+                <img src="../static/images/newbg.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image imgSize">
                 <span class="class_cover">
                      <h4 class="m-font-size-blog-text m-margin-tb-tiny" th:text="${blog.description}"
                          style="line-height: 30px">大圣，此去欲何?</h4>
@@ -109,8 +109,6 @@
         </div>
     </div>
 </div>
-
-
 <!--中间内容-->
 <div class="m-padded-tb-big animated fadeIn">
     <div class="ui container">
@@ -177,7 +175,7 @@
                             <div class="five wide column">
                                 <a href="#" target="_blank" th:href="@{/blog/details/{id}/(id=${blog.id})}">
                                     <img src="../static/images/newbg.jpg" th:src="@{${blog.firstPicture}}" alt=""
-                                         class="ui rounded image">
+                                         class="ui rounded image imgSize">
                                 </a>
                             </div>
                             </a>
