@@ -16,8 +16,8 @@ import java.util.List;
  * @Date 2020/8/5
  * @Time 18:06
  */
-@Mapper
 @Repository
+@Mapper
 public interface AdminBlogDao {
 
 
