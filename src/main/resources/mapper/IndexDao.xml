@@ -8,7 +8,6 @@
         <result column="title" property="title"/>
         <result column="description" property="description"/>
         <result column="recommended" property="recommended"/>
-        <result column="content" property="content"/>
         <result column="picture" property="firstPicture"/>
         <result column="flag" property="flag"/>
         <result column="views" property="views"/>
