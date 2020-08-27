@@ -395,7 +395,7 @@ body{
 }
 .m-bg-class_cover_index {
     width: 100%;
-    height: 750px;
+    height: 100%;
     line-height: 50px;
     padding-left: 6px;
     background-color: rgba(0, 0, 0, .60);

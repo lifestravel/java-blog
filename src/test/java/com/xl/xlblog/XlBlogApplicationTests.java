@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
@@ -42,6 +43,7 @@ class XlBlogApplicationTests {
         PageHelper.startPage(1,2);
         List<Blog> blogs = indexDao.latestBlog();
         System.out.println(blogs);
+
     }
 
     @Autowired
