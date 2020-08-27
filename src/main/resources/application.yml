@@ -6,7 +6,7 @@ spring:
     servlet:
       content-type: text/html
     cache: false
-    mode: LEGACYHTML5
+    mode: HTML
   datasource:
     username: root
     password: '@Root123'
