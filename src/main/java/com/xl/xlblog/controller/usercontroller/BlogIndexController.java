@@ -29,19 +29,6 @@ public class BlogIndexController {
     @Autowired
     IndexService indexService;
 
-
-    @RequestMapping("")
-    public ModelAndView index(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
-                              @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        ModelAndView mv = new ModelAndView();
-        PageInfo<Blog> pageInfo = indexService.latestBlog(currentPage, pageSize);
-        List<Blog> blogs = indexService.latestRecommended();
-        mv.addObject("pageInfo", pageInfo);
-        mv.addObject("recommended", blogs);
-        mv.setViewName("index");
-        return mv;
-    }
-
     @PostMapping("/pageSelectBlog")
     public ModelAndView pageSelectBlog(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
                                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
