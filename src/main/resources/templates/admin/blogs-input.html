@@ -13,7 +13,7 @@
 <body>
 
 <!--导航-->
-<nav class="ui inverted gird-header" th:replace="/admin/common :: nav(1)">
+<nav class="ui inverted gird-header" th:replace="admin/admincommon :: nav(1)">
 
 </nav>
 <div class="m-padded-tb-hugex">
@@ -128,7 +128,7 @@
 <br>
 <br>
 <!--底部栏-->
-<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="~{/admin/common :: foot}">
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="~{admin/admincommon :: foot}">
     <!--容器-->
     <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
@@ -285,7 +285,7 @@
         load();
     });
 </script>
-<script th:include="~{/admin/common :: run-time}">
+<script th:include="~{admin/admincommon :: run-time}">
 
 </script>
 </body>

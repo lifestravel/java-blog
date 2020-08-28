@@ -11,7 +11,7 @@
 <body>
 
 <!--导航栏-->
-<nav class="ui inverted gird-header" th:replace="/admin/common :: nav(1)">
+<nav class="ui inverted gird-header" th:replace="admin/admincommon :: nav(1)">
 </nav>
 <div class="m-padded-tb-hugex">
     <div class="ui attached pointing menu">
@@ -139,7 +139,7 @@
 <br>
 
 <!--底部栏-->
-<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="/admin/common :: foot">
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="admin/admincommon :: foot">
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
@@ -289,7 +289,7 @@
                 .dropdown('clear');
         });
 </script>
-<script th:include="~{/admin/common :: run-time}">
+<script th:include="~{admin/admincommon :: run-time}">
 
 </script>
 </body>
