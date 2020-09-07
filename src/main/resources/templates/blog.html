@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
     <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
     <link rel="stylesheet" href="../static/css/timeline.css" th:href="@{/css/timeline.css}">
-    <div th:include="~{common::headcss}"></div>
+    <th:block th:include="~{common::headcss}"></th:block>
 </head>
 <body>
 
@@ -630,14 +630,15 @@ h5,h6{font-size:1em;}
 <br>
 <!--底部栏-->
 <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:include="~{common :: foot}"></footer>
-
+<!--Jquery一定要放依赖它的js的前边!!!!! 一定要!!!! 一定!!!-->
+<th:block th:include="~{common::footjs}"></th:block>
 <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
 <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
 <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
 <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
 
-<div th:include="~{common::footjs}"></div>
+
 <div class="snow-container"></div>
 
 <script th:include="~{common :: run-time}"></script>

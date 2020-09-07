@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XLBLOG-关于我</title>
-    <div th:include="~{common :: headcss}"></div>
+    <th:block th:include="~{common :: headcss}"></th:block>
 </head>
 <body>
 
@@ -127,7 +127,7 @@
 <!--底部栏-->
 <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="~{common :: foot}"></footer>
 
-<div th:include="~{common :: footjs}"></div>
+<th:block th:include="~{common :: footjs}"></th:block>
 <div class="snow-container"></div>
 <script>
     // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");

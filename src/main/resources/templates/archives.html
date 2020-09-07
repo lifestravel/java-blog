@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XLBLOG-时间轴</title>
     <link rel="stylesheet" href="../static/css/timeline.css" th:href="@{/css/timeline.css}">
-    <div th:include="~{common :: headcss}"></div>
+    <th:block th:include="~{common :: headcss}"></th:block>
 </head>
 <body>
 
@@ -45,7 +45,7 @@
 </footer>
 <div class="snow-container"></div>
 
-<div th:include="~{common :: footjs}"></div>
+<th:block th:include="~{common :: footjs}"></th:block>
 <script src="../static/lib/timeline/timeline.js" th:src="@{/lib/timeline/timeline.js}"></script>
 
 <script th:include="~{common :: run-time}">

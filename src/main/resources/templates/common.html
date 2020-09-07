@@ -117,7 +117,7 @@
     </div>
 
 </footer>
-<div th:fragment="headcss">
+<th:block th:fragment="headcss">
     <link href="../static/images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
@@ -137,9 +137,9 @@
         }
     </style>
 
-</div>
+</th:block>
 
-<div th:fragment="footjs">
+<th:block th:fragment="footjs">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 
@@ -169,7 +169,7 @@
             list-folded="true"
             list-max-height="500px">
     </meting-js>
-</div>
+</th:block>
 <div th:fragment="run-time">
 
 

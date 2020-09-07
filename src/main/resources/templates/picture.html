@@ -6,7 +6,7 @@
     <title>XLBLOG-照片墙</title>
     <link rel="stylesheet" href="../static/lib/picture/css/jkresponsivegallery.css"
           th:href="@{/lib/picture/css/jkresponsivegallery.css}">
-   <div th:include="~{common::headcss}"></div>
+   <th:block th:include="~{common::headcss}"></th:block>
 </head>
 <body>
 
@@ -50,9 +50,8 @@
 <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity" th:replace="~{common :: foot}"></footer>
 
 
-<script src="../static/lib/picture/js/jkresponsivegallery.js"
-        th:src="@{/lib/picture/js/jkresponsivegallery.js}"></script>
-<div th:include="~{common::footjs}"></div>
+<th:block th:include="~{common::footjs}"></th:block>
+<script src="../static/lib/picture/js/jkresponsivegallery.js" th:src="@{/lib/picture/js/jkresponsivegallery.js}"></script>
 <div class="snow-container"></div>
 <script th:include="~{common :: run-time}">
 
