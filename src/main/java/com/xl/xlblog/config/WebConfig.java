@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //注册TestInterceptor拦截器
+        //注册Interceptor拦截器
         InterceptorRegistration registration = registry.addInterceptor(new LoginInterceptor());
         //管理员的所有路径都被拦截
         registration.addPathPatterns("/admin/**");

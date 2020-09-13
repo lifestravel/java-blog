@@ -41,4 +41,8 @@ public class MD5Utils {
         }
         return result;
     }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        System.out.println(getEncryption("@Root123++"));
+    }
 }
