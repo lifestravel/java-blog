@@ -38,7 +38,7 @@
         select type.id id,name from type,blogtype where blogtype.typeId = type.id and blogtype.blogId = #{id}
     </select>
 
-    <select id = "selBlogIdByType" resultType="Long" parameterType="int">
+    <select id = "selBlogIdByType" resultType="java.lang.Long" parameterType="int">
         select blogId from blogtype where typeId = #{typeId}
     </select>
 

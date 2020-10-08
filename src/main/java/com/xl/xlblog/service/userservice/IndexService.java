@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IndexService {
     /**
-     * 最新博客
+     * 最新推荐
      * @return
      */
    List<Blog> latestRecommended();

@@ -30,7 +30,7 @@
                     </div>
                     <div class="item">
                         <i class="user outline outline icon m-font-size-text-mini"></i>
-                        <a href="#" style="color: #ffffff;font-size: 18px" th:text="${blog.user.nickName}">人在旅途</a>
+                        <a  th:href="@{/blog/aboutMe}" target="_blank" style="color: #ffffff;font-size: 18px" th:text="${blog.user.nickName}">人在旅途</a>
                     </div>
                     <div class="item">
                         <i class="calendar icon m-font-size-text-mini"></i>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="item">
                         <i class="clone icon m-font-size-text-mini"></i>
-                        <a href="#" target="_blank" style="color: #ffffff;font-size: 16px" th:text="${blog.type.name}">我的故事</a>
+                        <a th:href="@{/blog/blogTypes}" target="_blank" style="color: #ffffff;font-size: 16px" th:text="${blog.type.name}">我的故事</a>
                     </div>
                     <div class="item">
                         <i class="eye icon m-font-size-text-mini"></i> <span class="m-font-size-text-mini"

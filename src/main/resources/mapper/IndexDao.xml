@@ -25,7 +25,7 @@
     </resultMap>
 
     <select id = "latestRecommended" resultMap="blogMap" >
-        select id,picture,description from blog where recommended = 1 and publish = 1 order by updateTime desc LIMIT 0,4
+        select id,picture,title from blog where recommended = 1 and publish = 1 order by updateTime desc LIMIT 0,4
     </select>
 
     <select id = "latestBlog" resultMap="blogMap">

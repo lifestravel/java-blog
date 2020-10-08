@@ -25,6 +25,6 @@
     </resultMap>
     <select id = "pageSearch" resultMap="searchMap" parameterType="string">
         <bind name = "search" value = "'%'+search+'%'"/>
-        select  * from blog where publish = 1 and (title like #{search} or content like #{search} or description like #{search})
+        select  * from blog where publish = 1 and (title like #{search}  or description like #{search})
     </select>
 </mapper>

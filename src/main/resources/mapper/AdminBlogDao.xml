@@ -75,7 +75,7 @@
 
     <update id="editBlog" parameterType="blog">
       update blog set title=#{title},content=#{content},picture=#{firstPicture},flag=#{flag},appreciation=#{appreciation},
-      shareStatement=#{shareStatement},commentable=#{commentable},publish=#{publish},description=#{description} where id=#{id}
+      shareStatement=#{shareStatement},recommended = #{recommended},commentable=#{commentable},publish=#{publish},description=#{description} where id=#{id}
     </update>
 
     <update id = "editBlog_Type" parameterType="long">
