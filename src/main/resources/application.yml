@@ -9,7 +9,7 @@ spring:
     mode: HTML
   datasource:
     username: root
-    password: '***'
+    password: '@Root123'
     url: jdbc:mysql://127.0.0.1:3306/myblog?useSSL=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver # com.mysql.jdbc.Driver
       #   使用 Druid 数据源
